@@ -20,8 +20,8 @@ def find_files(directory: Path, patterns: List[str], exclude_patterns: List[str]
 
 @click.command()
 @click.argument('directory', type=click.Path(exists=True, file_okay=False, dir_okay=True, path_type=Path))
-@click.option('--patterns', '-p', multiple=True, default=['*.py'], 
-              help='File patterns to include (e.g., "*.py", "*.js")')
+@click.option('--patterns', '-p', default='*.py', 
+              help='Comma-separated file patterns to include (e.g., "*.py, *.js")')
 @click.option('--exclude', '-e', multiple=True, default=['.*', '__pycache__/*'],
               help='Patterns to exclude')
 @click.option('--output', '-o', type=click.Path(path_type=Path), 
@@ -30,13 +30,16 @@ def find_files(directory: Path, patterns: List[str], exclude_patterns: List[str]
 @click.option('--header', '-h', help='Optional header text for the output file')
 @click.option('--language/--no-language', default=True,
               help='Include language hints in code blocks')
-def main(directory: Path, patterns: List[str], exclude: List[str], 
+def main(directory: Path, patterns: str, exclude: List[str], 
          output: Path, header: Optional[str], language: bool):
     """Combine multiple files into a single file formatted for LLM context."""
     
     try:
+        # Split comma-separated patterns and strip spaces
+        pattern_list = [p.strip() for p in patterns.split(',')]
+
         # Find all matching files
-        files = find_files(directory, patterns, exclude)
+        files = find_files(directory, pattern_list, exclude)
         
         if not files:
             console.print("[red]No matching files found![/red]")
