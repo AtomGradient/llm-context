@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="ai-context",  
-    version="0.0.3",
+    name="llm-context-cli",  
+    version="0.0.4",
     packages=find_packages(),
     install_requires=[
         "click>=8.0.0",
@@ -10,7 +10,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'ai-context=ai_context.cli:main',
+            'llm-context-cli=ai_context.cli:main',
         ],
     },
     author="AtomGradient",

@@ -3,8 +3,8 @@ requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ai-context"
-version = "0.0.3"
+name = "llm-context-cli"
+version = "0.0.4"
 description = "A tool to combine multiple files into a single file for AI context"
 readme = "README.md"
 authors = [{ name = "atomgradient", email = "alex@atomgradient.com" }]
@@ -25,4 +25,4 @@ requires-python = ">=3.7"
 Homepage = "https://github.com/AtomGradient/llm-context"
 
 [project.scripts]
-ai-context = "ai_context.cli:main"
+llm-context-cli = "ai_context.cli:main"
