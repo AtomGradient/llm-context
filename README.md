@@ -53,8 +53,8 @@ Customize the output with various options:
 
 ```bash
 llm-context-cli /path/to/project \
-    --patterns "*.py" "*.js" \
-    --exclude "__pycache__/*" "node_modules/*" \
+    --patterns "*.py, *.js" \
+    --exclude "__pycache__/*, node_modules/*" \
     --output llmcontext.txt \
     --header "Project source code for review:" \
     --no-language
@@ -64,8 +64,8 @@ llm-context-cli /path/to/project \
 
 | Option | Short | Description | Example |
 |--------|-------|-------------|----------|
-| `--patterns` | `-p` | File patterns to include (multiple allowed) | `--patterns "*.py" "*.js"` |
-| `--exclude` | `-e` | Patterns to exclude (multiple allowed) | `--exclude "test/*" "*.pyc"` |
+| `--patterns` | `-p` | File patterns to include (multiple allowed) | `--patterns "*.py, *.js"` |
+| `--exclude` | `-e` | Patterns to exclude (multiple allowed) | `--exclude "test/*, *.pyc"` |
 | `--output` | `-o` | Output file path | `--output combined.txt` |
 | `--header` | `-h` | Optional header text | `--header "Source code:"` |
 | `--language/--no-language` | - | Toggle language hints in code blocks | `--no-language` |
@@ -76,7 +76,7 @@ llm-context-cli /path/to/project \
 
 ```bash
 llm-context-cli . \
-    --patterns "*.py" "*.js" \
+    --patterns "*.py, *.js" \
     --exclude "tests/*" \
     --header "Frontend and Backend Source Code:"
 ```

@@ -14,7 +14,7 @@ def find_files(directory: Path, patterns: List[str], exclude_patterns: List[str]
         for path in directory.rglob("*"):
             if path.is_file() and fnmatch.fnmatch(path.name, pattern):
                 # Check if file should be excluded
-                if not any(fnmatch.fnmatch(path.name, exc) for exc in exclude_patterns):
+                if not any(fnmatch.fnmatch(str(path.relative_to(directory)), exc) for exc in exclude_patterns):
                     files.append(path)
     return sorted(files)
 
@@ -22,24 +22,28 @@ def find_files(directory: Path, patterns: List[str], exclude_patterns: List[str]
 @click.argument('directory', type=click.Path(exists=True, file_okay=False, dir_okay=True, path_type=Path))
 @click.option('--patterns', '-p', default='*.py', 
               help='Comma-separated file patterns to include (e.g., "*.py, *.js")')
-@click.option('--exclude', '-e', multiple=True, default=['.*', '__pycache__/*'],
-              help='Patterns to exclude')
+@click.option('--exclude', '-e', default='.*, __pycache__/*',
+              help='Comma-separated patterns to exclude (e.g., "__pycache__/*, node_modules/*")')
 @click.option('--output', '-o', type=click.Path(path_type=Path), 
               default=Path('llm-context-files.txt'),
               help='Output file path')
 @click.option('--header', '-h', help='Optional header text for the output file')
 @click.option('--language/--no-language', default=True,
               help='Include language hints in code blocks')
-def main(directory: Path, patterns: str, exclude: List[str], 
+def main(directory: Path, patterns: str, exclude: str, 
          output: Path, header: Optional[str], language: bool):
     """Combine multiple files into a single file formatted for LLM context."""
     
     try:
         # Split comma-separated patterns and strip spaces
         pattern_list = [p.strip() for p in patterns.split(',')]
+        exclude_list = [e.strip() for e in exclude.split(',')]
+
+        # Load .gitignore patterns from all directories and combine with provided excludes
+        all_excludes = exclude_list
 
         # Find all matching files
-        files = find_files(directory, pattern_list, exclude)
+        files = find_files(directory, pattern_list, all_excludes)
         
         if not files:
             console.print("[red]No matching files found![/red]")
