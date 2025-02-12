@@ -1,4 +1,4 @@
-# LLM Context
+# AI Context
 
 <div align="center">
 
@@ -28,13 +28,13 @@
 Install using pip:
 
 ```bash
-pip install llm-context
+pip install ai-context
 ```
 
 Or install with pipx for isolated environments:
 
 ```bash
-pipx install llm-context
+pipx install ai-context
 ```
 
 ## 💻 Usage
@@ -44,7 +44,7 @@ pipx install llm-context
 Simply point the tool to your project directory:
 
 ```bash
-llm-context /path/to/project
+ai-context /path/to/project
 ```
 
 ### Advanced Usage
@@ -52,7 +52,7 @@ llm-context /path/to/project
 Customize the output with various options:
 
 ```bash
-llm-context /path/to/project \
+ai-context /path/to/project \
     --patterns "*.py" "*.js" \
     --exclude "__pycache__/*" "node_modules/*" \
     --output llmcontext.txt \
@@ -75,7 +75,7 @@ llm-context /path/to/project \
 ### Combining Python and JavaScript Files
 
 ```bash
-llm-context . \
+ai-context . \
     --patterns "*.py" "*.js" \
     --exclude "tests/*" \
     --header "Frontend and Backend Source Code:"
@@ -84,7 +84,7 @@ llm-context . \
 ### Processing a Specific Directory
 
 ```bash
-llm-context ./src \
+ai-context ./src \
     --patterns "*.ts" \
     --output typescript-code.txt \
     --language

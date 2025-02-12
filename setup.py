@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="llm-context",
+    name="ai-context",  
     version="0.0.3",
     packages=find_packages(),
     install_requires=[
@@ -10,13 +10,13 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'llm-context=llm_context.cli:main',
+            'ai-context=ai_context.cli:main',
         ],
     },
     author="AtomGradient",
     author_email="alex@atomgradient.com",
-    description="A tool to combine multiple files into a single file for LLM context",
-    long_description="A command-line tool to combine multiple files into a single file formatted for LLM context",
+    description="A tool to combine multiple files into a single file for AI context",
+    long_description="A command-line tool to combine multiple files into a single file formatted for AI context",
     long_description_content_type="text/markdown",
     url="https://github.com/atomgradient/llm-context",
     classifiers=[
