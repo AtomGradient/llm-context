@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "llm-context-cli"
-version = "0.0.4"
+version = "0.0.5"
 description = "A tool to combine multiple files into a single file for AI context"
 readme = "README.md"
 authors = [{ name = "atomgradient", email = "alex@atomgradient.com" }]
